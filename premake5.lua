@@ -5,20 +5,12 @@ project "imgui"
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
-	files
-	{
-		"imconfig.h",
-		"imgui.h",
-		"imgui.cpp",
-		"imgui_draw.cpp",
-		"imgui_internal.h",
-		"imgui_widgets.cpp",
-		"imstb_rectpack.h",
-		"imstb_textedit.h",
-		"imstb_truetype.h",
-		"imgui_demo.cpp"
-	}
+	files { "*.h", "*.cpp" }
+	vpaths { ["imgui"] = { "../*.cpp", "../*.h", "../misc/debuggers/*.natvis" } }
 
+	filter { "toolset:msc*" }
+			files { "../misc/debuggers/*.natvis" }
+		
 	filter "system:windows"
 		systemversion "latest"
 		cppdialect "C++17"
